@@ -1,2 +1,2 @@
-# blogScript
- A python script that can add/update/delete posts in my Firebase realtime database.
+# blog
+A place to talk about what im learning
