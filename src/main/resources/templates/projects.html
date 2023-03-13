@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}"/>
+    <script defer th:src="@{/fontawesome/js/all.js}"></script>
+    <title>Projects</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+    <hr/>
+    <div class="projects-container">
+        <h2 class="mt-2 mb-2 text-center">Projects</h2>
+        <!-- Projects -->
+        <section class="mt-4 text-white" id="projects">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">
+                                <a href="/" target="_blank"
+                                   rel="noreferrer noopener" class="website-link">Blog (Click For Website)</a>
+                            </h5>
+                            <p class="card-text">
+                                Created a portfolio website with a blog element using Java by utilizing the
+                                Spring framework, Spring Security and Thymeleaf, to serve dynamic content.
+                                User credentials and blog posts are stored in a MySQL database. The
+                                use of Spring Security provides authentication and authorization for users,
+                                ensuring that the application is secure.
+                            </p>
+
+                            <a href="https://github.com/marl-Am/blog" target="_blank" rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-danger">Java</li>
+                                <li class="tech text-white bg-success">Spring</li>
+                                <li class="tech text-white bg-success">Spring Security</li>
+                                <li class="tech text-white bg-success">Thymeleaf</li>
+                                <li class="tech text-white bg-success">JavaScript</li>
+                                <li class="tech text-white bg-success">MySQL</li>
+                                <li class="tech text-white bg-success">HTML</li>
+                                <li class="tech text-white bg-success">CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">
+                                <a href="https://mycity-diode-380221.uk.r.appspot.com/" target="_blank"
+                                   rel="noreferrer noopener" class="website-link">Mycity (Click For Website)</a>
+                            </h5>
+                            <p class="card-text">
+                                Developed a cloud application rendered by React where a client
+                                provides a name of a city and an HTTP GET request is sent to the
+                                proper endpoints to the Spring backend. Spring retrieves the
+                                data from the external APIs and delivers it to the front-end. Deployed to Google App
+                                Engine.
+                            </p>
+
+                            <a href="https://github.com/marl-Am/my-city" target="_blank" rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-danger">Java</li>
+                                <li class="tech text-white bg-success">React.js</li>
+                                <li class="tech text-white bg-success">Spring</li>
+                                <li class="tech text-white bg-success">CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">
+                                <a href="https://bugger.pythonanywhere.com/" target="_blank" rel="noreferrer noopener"
+                                   class="website-link">Bug Tracker (Click For Website)</a>
+                            </h5>
+                            <p class="card-text">
+                                Developed a bug tracker web application using Bootstrap
+                                to design the frontend and Flask as the
+                                backend that allows users to create an account where they can
+                                create/edit/delete projects and their tasks. The data is stored in a
+                                MySQL database. Deployed to PythonAnywhere.
+                            </p>
+                            <a href="https://github.com/marl-Am/bug-reporter" target="_blank" rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-success">Python</li>
+                                <li class="tech text-white bg-success">Flask</li>
+                                <li class="tech text-white bg-success">MySQL</li>
+                                <li class="tech text-white bg-success">JavaScript</li>
+                                <li class="tech text-white bg-success">HTML</li>
+                                <li class="tech text-white bg-success">CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">
+                                <a href="https://password-generator-681b7.web.app/" target="_blank"
+                                   rel="noreferrer noopener"
+                                   class="website-link">
+                                    Password Generator (Click For Website)
+                                </a>
+                            </h5>
+                            <p class="card-text">
+                                Designed and deployed a password generator using the Flask web framework. Clients have
+                                the option of generating passwords of length 6 to 30 that include lowercase characters,
+                                uppercase
+                                characters, numbers, and symbols. The app was deployed to Google Firebase.
+                            </p>
+                            <a href="https://github.com/marl-Am/password-generator" target="_blank"
+                               rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-success">Python</li>
+                                <li class="tech text-white bg-success">Flask</li>
+                                <li class="tech text-white bg-success">JavaScript</li>
+                                <li class="tech text-white bg-success">HTML</li>
+                                <li class="tech text-white bg-success">CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">Beam (Web scraper)</h5>
+                            <p class="card-text">
+                                A science news web scraper Flask app that displays information
+                                from one article.
+                            </p>
+                            <a href="https://github.com/marl-Am/beam" target="_blank" rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-success">Python</li>
+                                <li class="tech text-white bg-success">Flask</li>
+                                <li class="tech text-white bg-success">JavaScript</li>
+                                <li class="tech text-white bg-success">HTML</li>
+                                <li class="tech text-white bg-success">CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">Hiit It</h5>
+                            <p class="card-text">
+                                A web based HIIT (High-intensity interval training) timer used for cardio exercises.
+                            </p>
+                            <a href="https://github.com/marl-Am/hiit-it" target="_blank" rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-success">JavaScript</li>
+                                <li class="tech text-white bg-success">HTML</li>
+                                <li class="tech text-white bg-success">CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body bg-dark">
+                            <h5 class="card-title text-warning fw-bold">Forager</h5>
+                            <p class="card-text">
+                                Using the Google Books API, we can search for a book on an
+                                Android device.
+                            </p>
+                            <a href="https://github.com/marl-Am/Forager" target="_blank" rel="noreferrer noopener"
+                               class="btn btn-outline-warning">View Code</a>
+                            <ul class="tech-ctn list-unstyled d-flex mt-1 text-end">
+                                <li class="tech text-white bg-danger">Java</li>
+                                <li class="tech text-white bg-success">Android Studio</li>
+                                <li class="tech text-white bg-success">Google Books API</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <hr/>
+</div>
+<!-- Back to top button -->
+<button type="button" class="btn btn-warning btn-floating btn-lg" id="btn-back-to-top">
+    <i class="fa-solid fa-circle-arrow-up"></i>
+</button>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script type="text/javascript" src="/js/backToTop.js"></script>
+</body>
+</html>

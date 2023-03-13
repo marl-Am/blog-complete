@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}" />
+    <script defer th:src="@{/fontawesome/js/all.js}"></script>
+    <title>Post</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<div class="container justify-content-center">
+    <hr />
+    <div class="post mt-3">
+        <h2 th:text="${post.title}">Title</h2>
+        <div class="time-stamp">
+            <h6 th:text=" 'Published by ' + ${post.user.username} + ' on ' + ${post.updatedOn}">Updated On</h6>
+        </div>
+        <!-- The th:utext helps to show the image-->
+        <p th:utext="${post.content}">body text</p>
+        <ul class="tag-container">
+            <li class="excerpt post-tag" th:each="tag : ${post.tags}">
+                <span class="post-category text-white bg-success mb-3" th:text="${tag}"></span>
+            </li>
+        </ul>
+    </div>
+    <ul sec:authorize="hasAnyRole('ROLE_ADMIN')" class="post-btn mb-2">
+        <li><a class="btn btn-info mt-2" th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</a></li>
+        <li><a class="btn btn-danger mt-2" th:href="@{'/posts/' + ${post.id} + '/delete'}">Delete</a></li>
+    </ul>
+
+    <hr />
+</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

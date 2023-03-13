@@ -1,0 +1,140 @@
+
+.new-post, .edit-post {
+    text-align: center;
+}
+
+.new-post li {
+    list-style: none;
+}
+
+.post-tag {
+    display: inline-block;
+    border-radius: 4px;
+    letter-spacing: .2em;
+    font-size: .7rem;
+    text-transform: uppercase;
+}
+
+.post-btn{
+    letter-spacing: .2em;
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.post-btn li {
+    display: inline-block;
+    list-style: none;
+}
+
+.time-stamp h6{
+    display: inline-block;
+}
+
+/* Contact info */
+.icons a {
+    text-decoration: none;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* optional - set a height for the parent div */
+}
+
+.child {
+    background-color: wheat;
+    padding: 20px;
+}
+
+.text-custom-coral {
+    color: #ea4242;
+}
+
+/* Align Tags */
+.tag-grid {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.form-check {
+    padding: .5rem;
+    display: inline-block;
+}
+
+/* Projects */
+.projects-container{
+    margin: 10px;
+}
+
+.website-link {
+    color: coral;
+    text-decoration: none;
+}
+
+.website-link:hover {
+    color: lightcoral;
+    text-decoration: underline;
+}
+
+.tech{
+    margin: 2px;
+}
+
+/* Back to top btn */
+#btn-back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+}
+
+/* Post tags */
+.tag-container{
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+}
+
+.post-category {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 700;
+    border-radius: 2px;
+    margin: 2px;
+}
+
+/* Footer */
+footer a{
+    text-decoration: none;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}
+
+/* Post */
+.post-title{
+    font-size: x-large;
+}
+
+/* Contact */
+a:hover{
+    transform: translateY(-2px);
+    /*transition: transform 250ms;*/
+}
+
+/* Projects tech used */
+.tech{
+    align-items: center;
+    font-weight: 600;
+    border-radius: 2px;
+    margin: 2px;
+}

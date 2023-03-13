@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}" />
+    <script defer th:src="@{/fontawesome/js/all.js}"></script>
+    <script src="/js/jquery/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/7enbu92m9298y7vmejj0gos5ecekmmzcsfu52l4woufvyzph/tinymce/6/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <title>New Post</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+    <h2 class="new-post">New Post</h2>
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="row">
+        <div class="col-md-8 mt-5 mx-auto">
+            <form action="#" th:action="@{'/posts/new'}" th:object="${post}" method="post">
+                <input type="hidden" th:field="*{user}" />
+                <input type="hidden" th:field="*{createdOn}" />
+                <div class="form-group mt-2">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" placeholder="Title" class="form-control" th:field="*{title}" required/>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="content">Content:</label>
+                    <textarea type="text"  id="content" placeholder="Content" class="form-control"
+                              th:field="*{content}" autocomplete="off"></textarea>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label for="tags">Tags:</label>
+                    <div class="tag-grid">
+                        <div class="form-check" th:each="tag : ${tags}">
+                            <input id="tags" class="form-check-input" type="checkbox"
+                                   th:id="${'tag-' + tag}" th:name="tags"
+                                   th:value="${tag}">
+                            <label class="form-check-label text-dark" th:for="${'tag-' + tag}"
+                                   th:text="${tag}"></label>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-2 mb-2" id="submit" type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <hr />
+</div>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script>
+    tinymce.init({
+        selector: 'textarea#content',
+        height: 500,
+        plugins: 'codesample',
+        codesample_languages: [
+            { text: 'HTML/XML', value: 'markup' },
+            { text: 'JavaScript', value: 'javascript' },
+            { text: 'CSS', value: 'css' },
+            { text: 'PHP', value: 'php' },
+            { text: 'Ruby', value: 'ruby' },
+            { text: 'Python', value: 'python' },
+            { text: 'Java', value: 'java' },
+            { text: 'C', value: 'c' },
+            { text: 'C#', value: 'csharp' },
+            { text: 'C++', value: 'cpp' }
+        ],
+        toolbar: 'codesample',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+</script>
+<script type="text/javascript" src="/js/app.js"></script>
+<!-- Need for tinymce-->
+<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

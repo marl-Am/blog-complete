@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}" />
+    <script defer th:src="@{/fontawesome/js/all.js}"></script>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<div class="home container">
+    <hr />
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN')" class="new-post" >
+        <a class="btn btn-success" th:href="@{/posts/new}">New Post</a>
+    </div>
+
+    <div class="posts-container">
+
+        <div class="post mt-2 mb-2" th:each="post : ${posts}">
+            <div class="shadow-lg p-2 mb-2 bg-body-tertiary rounded text-center bg-dark">
+                <h2><a class="post-title text-custom-coral" th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}">Title</a></h2>
+                <div class="time-stamp text-white">
+                    <h6 th:text=" 'Published by ' + ${post.user.username} + ' on ' + ${post.updatedOn}">Updated On</h6>
+                </div>
+                <ul class="tag-container justify-content-center">
+                    <li class="excerpt post-tag" th:each="tag : ${post.tags}">
+                        <span class="post-category text-white bg-success mb-3" th:text="${tag}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <hr />
+
+</div>
+<!-- Back to top button -->
+<button type="button" class="btn btn-warning btn-floating btn-lg" id="btn-back-to-top">
+    <i class="fa-solid fa-circle-arrow-up"></i>
+</button>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script type="text/javascript" src="/js/backToTop.js"></script>
+</body>
+</html>

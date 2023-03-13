@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}" />
+    <script defer th:src="@{/fontawesome/js/all.js}"></script>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+    <hr />
+    <h4 class="text-center">Login</h4>
+    <div th:if="${param.message}" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <span th:text="${param.message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <span th:text="${param.error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <form action="#"
+          th:action="@{/login}"
+          method="POST">
+        <div class="col-md-12 mt-2">
+            <label for="email">E-mail Address</label>
+            <input class="form-control" type="email" id="email" name="email"
+                   placeholder="E-mail Address" required>
+        </div>
+
+        <div class="col-md-12 mt-2">
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" name="password"
+                   placeholder="Password" required>
+        </div>
+
+        <div class="form-button mt-3">
+            <button id="submit" type="submit" class="btn btn-primary">Login</button>
+        </div>
+
+    </form>
+    <hr />
+</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"></script>
+</body>
+</html>
