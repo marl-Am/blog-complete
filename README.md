@@ -1,2 +1,2 @@
 # blog
-A place to talk about what im learning
+Where i discuss what im learning and a place to show my projects.
