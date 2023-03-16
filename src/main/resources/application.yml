@@ -16,9 +16,9 @@ info:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_SERVER_NAME}:${DB_PORT}/blog-complete?sslmode=require
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://mypostgresservername2023.postgres.database.azure.com:1433/blog-complete?sslmode=require
+    username: myusernamepost
+    password: mypasswordpostMSA!
     name: blog-complete
 
   sql:
