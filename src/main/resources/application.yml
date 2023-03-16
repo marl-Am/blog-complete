@@ -1,0 +1,26 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: blog-complete
+    description: A blog with articles about The Spring Framework.
+    author: Marlon Amedee
+    version: '@project.version@'
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_SERVER_NAME}:${DB_PORT}/blog-complete?sslmode=require
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    name: blog-complete
+
+  sql:
+    init:
+      mode: always # you won't do this in prod, I'm just doing this for demo purposes
