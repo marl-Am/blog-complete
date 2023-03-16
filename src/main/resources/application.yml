@@ -7,13 +7,6 @@ management:
     env:
       enabled: true
 
-info:
-  application:
-    name: blog-complete
-    description: A blog with articles about The Spring Framework.
-    author: Marlon Amedee
-    version: '@project.version@'
-
 spring:
   datasource:
     url: jdbc:postgresql://mypostgresservername2023.postgres.database.azure.com:1433/blog-complete?sslmode=require
@@ -24,3 +17,10 @@ spring:
   sql:
     init:
       mode: always # you won't do this in prod, I'm just doing this for demo purposes
+
+info:
+  application:
+    name: blog-complete
+    description: A blog with articles about The Spring Framework.
+    author: Marlon Amedee
+    version: '@project.version@'
