@@ -1,4 +1,3 @@
-# Users
 CREATE TABLE IF NOT EXISTS public.user
 (
     id       SERIAL PRIMARY KEY,
@@ -25,14 +24,12 @@ CREATE TABLE IF NOT EXISTS public.user_authority
     authority_name TEXT REFERENCES public.authority (name)
 );
 
-# Authority
 CREATE TABLE IF NOT EXISTS public.authority
 (
     name TEXT PRIMARY KEY
 );
-#
 
-# Posts
+
 CREATE TABLE IF NOT EXISTS public.post
 (
     id        SERIAL PRIMARY KEY,
@@ -48,4 +45,3 @@ CREATE TABLE IF NOT EXISTS public.post_tags
     post_id INTEGER REFERENCES public.post (id),
     tag     TEXT
 );
-#

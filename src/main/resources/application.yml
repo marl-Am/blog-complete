@@ -9,7 +9,7 @@ management:
 
 spring:
   datasource:
-    url: jdbc:postgresql://mypostgresservername2023.postgres.database.azure.com:1433/blog-complete?sslmode=require
+    url: jdbc:postgresql://mypostgresservername2023.postgres.database.azure.com:5432/blog-complete?sslmode=require
     username: myusernamepost
     password: mypasswordpostMSA!
     name: blog-complete
