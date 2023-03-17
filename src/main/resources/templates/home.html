@@ -19,17 +19,13 @@
         <a class="btn btn-success" th:href="@{/posts/new}">New Post</a>
     </div>
 
-    <div class="container">
-        <div class="tags"></div>
-    </div>
-
     <div class="posts-container">
 
         <div class="post mt-2 mb-2" th:each="post : ${posts}">
             <div class="shadow-lg p-2 mb-2 bg-body-tertiary rounded text-center bg-dark">
-                <h2><a class="post-title text-custom-coral" th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}">Title</a></h2>
-                <div class="time-stamp text-white">
-                    <h6 th:text=" 'Published by ' + ${post.user.username} + ' on ' + ${post.updatedOn}">Updated On</h6>
+                <h2><a class="post-title text-custom-coral" th:href="@{'/posts/' + ${post.postId}}" th:text="${post.title}">Title</a></h2>
+                <div class="time-stamp text-white text-muted">
+                    <h6 th:text=" 'Published on ' + ${post.updatedOn}">Updated On</h6>
                 </div>
                 <ul class="tag-container justify-content-center">
                     <li class="excerpt post-tag" th:each="tag : ${post.tags}">

@@ -1,6 +1,6 @@
 package com.marlon.blog.service;
 
-import com.marlon.blog.entity.User;
+import com.marlon.blog.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,24 +14,24 @@ import java.util.stream.Collectors;
 
 @Component("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
-    private final UserService userService;
-    public MyUserDetailsService(UserService userService) {
-        this.userService = userService;
+    private final AccountService accountService;
+    public MyUserDetailsService(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> optionalAccount = userService.findOneByEmail(email);
+        Optional<Account> optionalAccount = accountService.findOneByEmail(email);
         if (optionalAccount.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
-        User user = optionalAccount.get();
-        List<GrantedAuthority> grantedAuthorities = user
+        Account account = optionalAccount.get();
+        List<GrantedAuthority> grantedAuthorities = account
                 .getAuthorities()
                 .stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(account.getEmail(), account.getPassword(), grantedAuthorities);
     }
 }

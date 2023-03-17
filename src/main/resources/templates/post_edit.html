@@ -22,10 +22,10 @@
     </div>
     <div class="row">
         <div class="col-md-8 mt-5 mx-auto">
-            <form action="#" th:action="@{'/posts/{id}/edit'(id=${post.id})}"
+            <form action="#" th:action="@{'/posts/{postId}/edit'(postId=${post.postId})}"
                   th:object="${post}" method="post" id="post-form">
                 <input type="hidden" name="_method" value="put"/>
-                <input type="hidden" th:field="*{user}" />
+                <input type="hidden" th:field="*{account}" />
                 <input type="hidden" th:field="*{createdOn}" />
                 <div class="form-group mt-2">
                     <label for="title">Title:</label>

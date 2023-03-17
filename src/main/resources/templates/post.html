@@ -18,7 +18,7 @@
     <div class="post mt-3">
         <h2 th:text="${post.title}">Title</h2>
         <div class="time-stamp">
-            <h6 th:text=" 'Published by ' + ${post.user.username} + ' on ' + ${post.updatedOn}">Updated On</h6>
+            <h6 th:text=" 'Published by ' + ${post.account.username} + ' on ' + ${post.updatedOn}">Updated On</h6>
         </div>
         <!-- The th:utext helps to show the image-->
         <p th:utext="${post.content}">body text</p>
@@ -29,8 +29,8 @@
         </ul>
     </div>
     <ul sec:authorize="hasAnyRole('ROLE_ADMIN')" class="post-btn mb-2">
-        <li><a class="btn btn-info mt-2" th:href="@{'/posts/' + ${post.id} + '/edit'}">Edit</a></li>
-        <li><a class="btn btn-danger mt-2" th:href="@{'/posts/' + ${post.id} + '/delete'}">Delete</a></li>
+        <li><a class="btn btn-info mt-2" th:href="@{'/posts/' + ${post.postId} + '/edit'}">Edit</a></li>
+        <li><a class="btn btn-danger mt-2" th:href="@{'/posts/' + ${post.postId} + '/delete'}">Delete</a></li>
     </ul>
 
     <hr />

@@ -22,6 +22,9 @@
                 <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
                 <li><a href="/projects" class="nav-link px-2 text-white">Projects</a></li>
                 <li><a href="/contact" class="nav-link px-2 text-white">Contact</a></li>
+                <div sec:authorize="isAuthenticated()">
+                    <li><a href="/account" class="nav-link px-2 text-white">Account</a></li>
+                </div>
             </ul>
 
             <div class="text-end">

@@ -15,8 +15,8 @@ public class PostService {
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
-    public Optional<Post> getById(Long id) {
-        return postRepository.findById(id);
+    public Optional<Post> getById(Long postId) {
+        return postRepository.findById(postId);
     }
     public List<Post> getAll() {
         return postRepository.findAll();
@@ -27,9 +27,10 @@ public class PostService {
 
     public void save(Post post) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMMM dd, yyyy hh:mm a");
         String stringDateTime = now.format(format);
-        if (post.getId() == null) {
+
+        if (post.getPostId() == null) {
             post.setCreatedOn(stringDateTime);
         }
         post.setUpdatedOn(stringDateTime);

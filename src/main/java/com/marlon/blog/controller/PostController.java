@@ -1,11 +1,11 @@
 package com.marlon.blog.controller;
 
 import com.marlon.blog.constants.Constants;
+import com.marlon.blog.entity.Account;
 import com.marlon.blog.entity.Post;
-import com.marlon.blog.entity.User;
 import com.marlon.blog.exceptions.ResourceNotFoundException;
 import com.marlon.blog.service.PostService;
-import com.marlon.blog.service.UserService;
+import com.marlon.blog.service.AccountService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,16 +20,16 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
-    private final UserService userService;
+    private final AccountService accountService;
 
-    public PostController(PostService postService, UserService userService) {
+    public PostController(PostService postService, AccountService accountService) {
         this.postService = postService;
-        this.userService = userService;
+        this.accountService = accountService;
     }
 
-    @GetMapping("/{id}")
-    public String getPost(@PathVariable Long id, Model model) {
-        Optional<Post> optionalPost = this.postService.getById(id);
+    @GetMapping("/{postId}")
+    public String getPost(@PathVariable("postId") Long postId, Model model) {
+        Optional<Post> optionalPost = this.postService.getById(postId);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             model.addAttribute("post", post);
@@ -46,11 +46,11 @@ public class PostController {
             return "redirect:/";
         }
         String authUsername = principal.getName();
-        Optional<User> optionalUser = userService.findOneByEmail(authUsername);
+        Optional<Account> optionalUser = accountService.findOneByEmail(authUsername);
         if (optionalUser.isPresent()) {
             List<String> postTags = new ArrayList<>();
             Post post = new Post();
-            post.setUser(optionalUser.get());
+            post.setAccount(optionalUser.get());
             post.setTags(postTags);
 
             model.addAttribute("tags", Constants.TAGS);
@@ -73,12 +73,12 @@ public class PostController {
             return "post_new";
         }
         postService.save(post);
-        return "redirect:/posts/" + post.getId();
+        return "redirect:/posts/" + post.getPostId();
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @PutMapping("/{id}/edit")
-    public String updatePost(@PathVariable Long id, @ModelAttribute("post") Post post, Model model,
+    @PutMapping("/{postId}/edit")
+    public String updatePost(@PathVariable("postId") Long postId, @ModelAttribute("post") Post post, Model model,
                              Principal principal) {
 
         if (principal.getName() == null) {
@@ -91,8 +91,8 @@ public class PostController {
             return "post_edit";
         }
 
-        Post existingPost = postService.getById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id " + id));
+        Post existingPost = postService.getById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with postId " + postId));
         if (!post.getTitle().equals(existingPost.getTitle())) {
             existingPost.setTitle(post.getTitle());
         }
@@ -103,16 +103,16 @@ public class PostController {
             existingPost.setTags(post.getTags());
         }
         postService.save(existingPost);
-        return "redirect:/posts/" + existingPost.getId();
+        return "redirect:/posts/" + existingPost.getPostId();
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping("/{id}/edit")
-    public String getPostForEdit(@PathVariable Long id, Model model, Principal principal) {
+    @GetMapping("/{postId}/edit")
+    public String getPostForEdit(@PathVariable("postId") Long postId, Model model, Principal principal) {
         if (principal.getName() == null) {
             return "redirect:/";
         }
-        Optional<Post> optionalPost = postService.getById(id);
+        Optional<Post> optionalPost = postService.getById(postId);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
 
@@ -125,12 +125,12 @@ public class PostController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping("/{id}/delete")
-    public String deletePost(@PathVariable Long id, Principal principal) {
+    @GetMapping("/{postId}/delete")
+    public String deletePost(@PathVariable("postId") Long postId, Principal principal) {
         if (principal.getName() == null) {
             return "redirect:/";
         }
-        Optional<Post> optionalPost = postService.getById(id);
+        Optional<Post> optionalPost = postService.getById(postId);
         if (optionalPost.isPresent()) {
             Post post = optionalPost.get();
             postService.delete(post);

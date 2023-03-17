@@ -15,6 +15,10 @@
 <div class="container">
     <hr />
     <h4 class="text-center">Login</h4>
+    <div th:if="${accountDeleted}" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <span th:text="${accountDeleted}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div th:if="${param.message}" class="alert alert-success alert-dismissible fade show text-center" role="alert">
         <span th:text="${param.message}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

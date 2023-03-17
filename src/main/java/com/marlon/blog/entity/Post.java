@@ -17,7 +17,7 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long postId;
     @Column(unique = true, nullable = false)
     private String title;
 
@@ -31,8 +31,8 @@ public class Post {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
+    @JoinColumn(name = "account_id", referencedColumnName = "accountId", nullable = false)
+    private Account account;
     @ElementCollection
     @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
     @Column(name = "tag")
@@ -41,7 +41,7 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
-                "id=" + id +
+                "postId=" + postId +
                 ", title='" + title + "'" +
                 ", content='" + content + "'" +
                 ", createdOn='" + createdOn + "'" +

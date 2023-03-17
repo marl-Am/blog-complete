@@ -1,10 +1,11 @@
 package com.marlon.blog.controller;
 
+import com.marlon.blog.entity.Account;
 import com.marlon.blog.entity.Authority;
-import com.marlon.blog.entity.User;
 import com.marlon.blog.enums.Role;
 import com.marlon.blog.repository.AuthorityRepository;
-import com.marlon.blog.service.UserService;
+import com.marlon.blog.service.AccountService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,30 +19,33 @@ import java.util.Set;
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
-    private final UserService userService;
+    private final AccountService accountService;
     private final AuthorityRepository authorityRepository;
 
-    public RegisterController(UserService userService, AuthorityRepository authorityRepository) {
-        this.userService = userService;
+    public RegisterController(AccountService accountService, AuthorityRepository authorityRepository) {
+        this.accountService = accountService;
         this.authorityRepository = authorityRepository;
     }
 
     @GetMapping
-    public String getRegisterForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
+    public String getRegisterForm(Model model, Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "redirect:/";
+        }
+        Account account = new Account();
+        model.addAttribute("account", account);
         return "register";
     }
     @PostMapping
-    public String registerNewUser(@ModelAttribute User user) {
-        if (userService.existsByUsername(user.getUsername()) || userService.existsByEmail(user.getEmail())) {
+    public String registerNewUser(@ModelAttribute Account account) {
+        if (accountService.existsByUsername(account.getUsername()) || accountService.existsByEmail(account.getEmail())) {
             return "redirect:/register?error=Username or email already taken.";
         }
-        user.setRole(Role.ROLE_GUEST);
+        account.setRole(Role.ROLE_GUEST);
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById("ROLE_GUEST").ifPresent(authorities::add);
-        user.setAuthorities(authorities);
-        userService.save(user);
+        account.setAuthorities(authorities);
+        accountService.save(account);
         return "redirect:/login?message=Account created successfully.";
     }
 }

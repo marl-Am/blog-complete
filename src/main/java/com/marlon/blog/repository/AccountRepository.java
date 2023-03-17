@@ -1,12 +1,12 @@
 package com.marlon.blog.repository;
 
-import com.marlon.blog.entity.User;
+import com.marlon.blog.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findOneByEmailIgnoreCase(String email);
+public interface AccountRepository extends JpaRepository<Account, Long> {
+    Optional<Account> findOneByEmailIgnoreCase(String email);
 
     boolean existsByUsername(String username);
 

@@ -15,10 +15,10 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User implements Serializable {
+public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long accountId;
     @Column(unique = true)
     private String username;
     @Column(unique = true)
@@ -26,19 +26,19 @@ public class User implements Serializable {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "account")
     private List<Post> posts;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_authority",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            name = "account_authority",
+            joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "accountId")},
             inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     private Set<Authority> authorities = new HashSet<>();
 
     @Override
     public String toString() {
         return "User {" +
-                "id=" + id +
+                "accountId=" + accountId +
                 ", username='" + username + "'" +
                 ", email='" + email + "'" +
                 ", authorities=" + authorities +

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}" />
+  <script defer th:src="@{/fontawesome/js/all.js}"></script>
+  <title>Account</title>
+</head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+
+<div class="container">
+  <hr />
+  <div class="parent">
+    <div class="child">
+      <div th:if="${error}" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <h4 class="mt-2 mb-2 text-center">Account Details</h4>
+      <div class="icons mt-2 mb-2 text-center">
+
+        <div class="post mt-2 mb-2">
+          <h6 th:text="'Email: ' + ${account.email}"></h6>
+          <h6 th:text="'Roles: ' + ${account.role}"></h6>
+          <a class="btn btn-danger" th:href="@{'/account/delete'}">Delete Account</a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>
+<!--<script>-->
+<!--  function confirmDelete(event) {-->
+<!--    event.preventDefault();-->
+<!--    if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {-->
+<!--      document.getElementById("delete-form").submit();-->
+<!--    }-->
+<!--  }-->
+<!--</script>-->
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
