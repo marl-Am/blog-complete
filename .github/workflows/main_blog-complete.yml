@@ -51,3 +51,5 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7C6596F70EA24C8A9B5500BA0CBFBF72 }}
           package: '*.jar'
+          exclude: |
+            **/*.png
