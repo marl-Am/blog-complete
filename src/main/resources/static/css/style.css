@@ -151,3 +151,10 @@ a:hover{
 .post-category{
     padding: 4px 8px;
 }
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 100%;
+        font-size: large;
+    }
+}
