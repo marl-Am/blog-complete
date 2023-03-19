@@ -4,12 +4,12 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
-    <title>Home</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/fontawesome/css/all.css}" />
     <script defer th:src="@{/fontawesome/js/all.js}"></script>
+    <title>Home</title>
 </head>
 <body>
 <header th:replace="~{fragments/header :: header}"></header>
@@ -39,7 +39,8 @@
     <hr />
 
 </div>
-<!-- Back to top button -->
+
+<!-- Back to top button btn-->
 <button type="button" class="btn btn-warning btn-floating btn-lg" id="btn-back-to-top">
     <i class="fa-solid fa-circle-arrow-up"></i>
 </button>
