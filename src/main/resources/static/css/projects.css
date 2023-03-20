@@ -1,0 +1,124 @@
+#btn-back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+}
+
+#my-links a {
+    text-decoration: none;
+    /* remove underline */
+    color: inherit;
+    /* remove blue */
+}
+
+#my-links a:hover {
+    text-decoration: underline;
+}
+
+#my-links ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+#my-links li {
+    list-style: none;
+}
+
+.social {
+    margin: 5px;
+}
+
+.summary {
+    text-align: center;
+}
+
+#projects {
+    margin: 5px;
+    margin-bottom: 15px;
+}
+
+.fa-brands:hover,
+.fa-solid:hover {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.website-link {
+    color: coral;
+    text-decoration: none;
+}
+
+.website-link:hover {
+    color: lightcoral;
+    text-decoration: underline;
+}
+
+.tech-ctn {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    max-height: 100%;
+    overflow: auto;
+}
+
+.tech {
+    align-items: center;
+    font-weight: 600;
+    border-radius: 2px;
+    margin: 2px;
+    padding: 4px 8px;
+}
+
+a:hover{
+    transform: translateY(-2px);
+}
