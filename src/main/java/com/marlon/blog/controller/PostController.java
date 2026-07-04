@@ -31,8 +31,7 @@ public class PostController {
     public String getPost(@PathVariable("postId") Long postId, Model model) {
         Optional<Post> optionalPost = this.postService.getById(postId);
         if (optionalPost.isPresent()) {
-            Post post = optionalPost.get();
-            model.addAttribute("post", post);
+            model.addAttribute("post", optionalPost.get());
             return "post";
         } else {
             return "error/404";
@@ -42,36 +41,50 @@ public class PostController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/new")
     public String getNewPost(Model model, Principal principal) {
-        if (principal.getName() == null) {
+        if (principal == null || principal.getName() == null) {
             return "redirect:/";
         }
-        String authUsername = principal.getName();
-        Optional<Account> optionalUser = accountService.findOneByEmail(authUsername);
-        if (optionalUser.isPresent()) {
-            List<String> postTags = new ArrayList<>();
-            Post post = new Post();
-            post.setAccount(optionalUser.get());
-            post.setTags(postTags);
+        Optional<Account> optionalAccount = accountService.findOneByEmail(principal.getName());
+        if (optionalAccount.isEmpty()) {
+            return "redirect:/";
+        }
 
-            model.addAttribute("tags", Constants.TAGS);
-            model.addAttribute("post", post);
-            return "post_new";
-        } else {
-            return "redirect:/";
-        }
+        List<String> postTags = new ArrayList<>();
+        Post post = new Post();
+        post.setAccount(optionalAccount.get());
+        post.setTags(postTags);
+
+        model.addAttribute("tags", Constants.TAGS);
+        model.addAttribute("post", post);
+        return "post_new";
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/new")
     public String createNewPost(@ModelAttribute("post") Post post, Principal principal, Model model) {
-        if (principal.getName() == null) {
+        if (principal == null || principal.getName() == null) {
             return "redirect:/";
         }
-        if (post.getTitle().isEmpty() || post.getContent().isEmpty() || post.getTags() == null) {
+
+        // The account is always derived from the authenticated session, never
+        // trusted from client-submitted form data. This is what was missing
+        // and caused the null account_id error.
+        Optional<Account> optionalAccount = accountService.findOneByEmail(principal.getName());
+        if (optionalAccount.isEmpty()) {
+            return "redirect:/";
+        }
+
+        boolean hasTitle = post.getTitle() != null && !post.getTitle().isBlank();
+        boolean hasContent = post.getContent() != null && !post.getContent().isBlank();
+        boolean hasTags = post.getTags() != null && !post.getTags().isEmpty();
+
+        if (!hasTitle || !hasContent || !hasTags) {
             model.addAttribute("tags", Constants.TAGS);
             model.addAttribute("error", "Please fill in all fields.");
             return "post_new";
         }
+
+        post.setAccount(optionalAccount.get());
         postService.save(post);
         return "redirect:/posts/" + post.getPostId();
     }
@@ -79,13 +92,17 @@ public class PostController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PutMapping("/{postId}/edit")
     public String updatePost(@PathVariable("postId") Long postId, @ModelAttribute("post") Post post, Model model,
-                             Principal principal) {
+            Principal principal) {
 
-        if (principal.getName() == null) {
+        if (principal == null || principal.getName() == null) {
             return "redirect:/";
         }
 
-        if (post.getTitle().isEmpty() || post.getContent().isEmpty() || post.getTags() == null || post.getTags().isEmpty()) {
+        boolean hasTitle = post.getTitle() != null && !post.getTitle().isBlank();
+        boolean hasContent = post.getContent() != null && !post.getContent().isBlank();
+        boolean hasTags = post.getTags() != null && !post.getTags().isEmpty();
+
+        if (!hasTitle || !hasContent || !hasTags) {
             model.addAttribute("tags", Constants.TAGS);
             model.addAttribute("error", "Please fill in all fields.");
             return "post_edit";
@@ -93,15 +110,11 @@ public class PostController {
 
         Post existingPost = postService.getById(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found with postId " + postId));
-        if (!post.getTitle().equals(existingPost.getTitle())) {
-            existingPost.setTitle(post.getTitle());
-        }
-        if (!post.getContent().equals(existingPost.getContent())) {
-            existingPost.setContent(post.getContent());
-        }
-        if (!post.getTags().equals(existingPost.getTags())) {
-            existingPost.setTags(post.getTags());
-        }
+
+        existingPost.setTitle(post.getTitle());
+        existingPost.setContent(post.getContent());
+        existingPost.setTags(post.getTags());
+
         postService.save(existingPost);
         return "redirect:/posts/" + existingPost.getPostId();
     }
@@ -109,15 +122,13 @@ public class PostController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/{postId}/edit")
     public String getPostForEdit(@PathVariable("postId") Long postId, Model model, Principal principal) {
-        if (principal.getName() == null) {
+        if (principal == null || principal.getName() == null) {
             return "redirect:/";
         }
         Optional<Post> optionalPost = postService.getById(postId);
         if (optionalPost.isPresent()) {
-            Post post = optionalPost.get();
-
             model.addAttribute("tags", Constants.TAGS);
-            model.addAttribute("post", post);
+            model.addAttribute("post", optionalPost.get());
             return "post_edit";
         } else {
             return "error/404";
@@ -125,15 +136,14 @@ public class PostController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping("/{postId}/delete")
+    @PostMapping("/{postId}/delete")
     public String deletePost(@PathVariable("postId") Long postId, Principal principal) {
-        if (principal.getName() == null) {
+        if (principal == null || principal.getName() == null) {
             return "redirect:/";
         }
         Optional<Post> optionalPost = postService.getById(postId);
         if (optionalPost.isPresent()) {
-            Post post = optionalPost.get();
-            postService.delete(post);
+            postService.delete(optionalPost.get());
             return "redirect:/";
         } else {
             return "error/404";

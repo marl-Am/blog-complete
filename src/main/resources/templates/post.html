@@ -34,7 +34,7 @@
         <li><a class="btn btn-info mt-2" th:href="@{'/posts/' + ${post.postId} + '/edit'}">Edit</a></li>
         
         <li>
-            <form th:action="@{'/posts/' + ${post.postId}} + '/delete'" method="post">
+            <form th:action="@{'/posts/' + ${post.postId} + '/delete'}" method="post">
                 <button type="submit" class="btn btn-danger mt-2">Delete</button>
             </form>
         </li>
