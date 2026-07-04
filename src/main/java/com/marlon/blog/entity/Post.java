@@ -22,7 +22,6 @@ public class Post {
     @Column(unique = true, nullable = false)
     private String title;
 
-    @Lob
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
