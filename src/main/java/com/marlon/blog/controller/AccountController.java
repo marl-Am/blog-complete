@@ -22,7 +22,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_GUEST')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GUEST')")
     @GetMapping("")
     public String showAccount(Model model, Authentication authentication) {
         Optional<Account> optionalAccount = accountService.findOneByEmail(authentication.getName());
@@ -34,7 +34,7 @@ public class AccountController {
         return "account";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_GUEST')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'GUEST')")
     @GetMapping("/delete")
     public String deleteAccount(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
         Optional<Account> optionalAccount = accountService.findOneByEmail(authentication.getName());
