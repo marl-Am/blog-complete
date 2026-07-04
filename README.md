@@ -1,5 +1,6 @@
-## [Blog](https://blog-complete.azurewebsites.net/)
+## [Blog](https://blog-complete-wogw.onrender.com/)
 A place to document what I am learning/interested in, and to show my portfolio.
+Originally deployed on Azure, I later redeployed it on Render with a Supabase PostgreSQL database.
 
 JAVA VERSION
 * Java 17
