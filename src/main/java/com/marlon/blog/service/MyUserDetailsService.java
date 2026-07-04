@@ -31,7 +31,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 .stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
-        System.out.println("Loaded authorities for " + account.getEmail() + ": " + grantedAuthorities);
+        
         return new org.springframework.security.core.userdetails.User(account.getEmail(), account.getPassword(), grantedAuthorities);
     }
 }
