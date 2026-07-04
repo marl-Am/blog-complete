@@ -17,7 +17,7 @@
 <header th:replace="~{fragments/header :: header}"></header>
 <div class="home container">
     <hr />
-    <div sec:authorize="hasAnyRole('ROLE_ADMIN')" class="new-post" >
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')" class="new-post">
         <a class="btn btn-success" th:href="@{/posts/new}">New Post</a>
     </div>
 
