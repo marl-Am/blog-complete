@@ -36,14 +36,27 @@ public class RegisterController {
         model.addAttribute("account", account);
         return "register";
     }
+    
     @PostMapping
     public String registerNewUser(@ModelAttribute Account account) {
-        if (accountService.existsByUsername(account.getUsername()) || accountService.existsByEmail(account.getEmail())) {
+        if (accountService.existsByUsername(account.getUsername())
+                || accountService.existsByEmail(account.getEmail())) {
             return "redirect:/register?error=Username or email already taken.";
         }
-        account.setRole(Role.ROLE_GUEST);
+
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById("ROLE_GUEST").ifPresent(authorities::add);
+
+        // Fetch admin email configuration from environment (fallback to a hardcoded default)
+        String adminEmail = System.getenv("ADMIN_EMAIL") != null ? System.getenv("ADMIN_EMAIL") : "admin@yourblog.com";
+
+        if (account.getEmail().equalsIgnoreCase(adminEmail)) {
+            account.setRole(Role.ROLE_ADMIN);
+            authorityRepository.findById("ROLE_ADMIN").ifPresent(authorities::add);
+        } else {
+            account.setRole(Role.ROLE_GUEST);
+            authorityRepository.findById("ROLE_GUEST").ifPresent(authorities::add);
+        }
+
         account.setAuthorities(authorities);
         accountService.save(account);
         return "redirect:/login?message=Account created successfully.";
