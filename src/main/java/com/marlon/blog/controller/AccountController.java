@@ -22,11 +22,11 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_GUEST')")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("")
     public String showAccount(Model model, Authentication authentication) {
         Optional<Account> optionalAccount = accountService.findOneByEmail(authentication.getName());
-        if(optionalAccount.isEmpty() || !optionalAccount.get().getEmail().equals(authentication.getName())){
+        if (optionalAccount.isEmpty() || !optionalAccount.get().getEmail().equals(authentication.getName())) {
             return "error/404";
         }
         Account account = optionalAccount.get();
@@ -34,7 +34,8 @@ public class AccountController {
         return "account";
     }
 
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_GUEST')")
+    // Change this line too
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete")
     public String deleteAccount(Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
         Optional<Account> optionalAccount = accountService.findOneByEmail(authentication.getName());
