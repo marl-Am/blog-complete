@@ -18,21 +18,25 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long postId;
+
     @Column(unique = true, nullable = false)
     private String title;
 
     @Lob
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
     @Column(nullable = false)
     private String createdOn;
+
     @Column(nullable = false)
     private String updatedOn;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "accountId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
+
     @ElementCollection
     @CollectionTable(name = "post_tags", joinColumns = @JoinColumn(name = "post_id"))
     @Column(name = "tag")
@@ -49,4 +53,3 @@ public class Post {
                 "}";
     }
 }
-
