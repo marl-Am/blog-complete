@@ -1,16 +1,17 @@
 package com.marlon.blog.service;
 
-import com.marlon.blog.entity.Authority;
-import com.marlon.blog.entity.Account;
-import com.marlon.blog.repository.AuthorityRepository;
-import com.marlon.blog.repository.AccountRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.marlon.blog.entity.Account;
+import com.marlon.blog.entity.Authority;
+import com.marlon.blog.repository.AccountRepository;
+import com.marlon.blog.repository.AuthorityRepository;
 
 @Service
 public class AccountService {
