@@ -21,6 +21,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
         this.authorityRepository = authorityRepository;
     }
+    
     public void save(Account account) {
         if (account.getAccountId() == null) {
             if (account.getAuthorities().isEmpty()) {
@@ -29,7 +30,13 @@ public class AccountService {
                 account.setAuthorities(authorities);
             }
         }
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
+
+        // Only encode the password if it's new/raw, NOT if it's already a BCrypt hash!
+        String rawPassword = account.getPassword();
+        if (rawPassword != null && !rawPassword.startsWith("$2a$") && !rawPassword.startsWith("$2b$")) {
+            account.setPassword(passwordEncoder.encode(rawPassword));
+        }
+
         accountRepository.save(account);
     }
     public Optional<Account> findOneByEmail(String email) {
