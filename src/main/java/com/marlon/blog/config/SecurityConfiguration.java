@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                                 "/account", "/account/**",
                                 "/js/**", "/css/**", "/images/**", "/fontawesome/**",
                                 "/webjars/**",
-                                "/error/403", "/error/404", "/error/500",
+                                "/error", "/error/**",
                                 "/projects", "/contact",
                                 "/register", "/register/**", "/login")
                         .permitAll()
