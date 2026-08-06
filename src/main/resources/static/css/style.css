@@ -188,3 +188,112 @@ a:hover{
     }
 }
 
+
+/* ============================================
+   Color Scheme: Space Indigo / Lavender Grey / Platinum
+   Rules with !important override Bootstrap's own utility
+   classes, since style.css loads before bootstrap.min.css.
+   Plain custom classes don't need it.
+   ============================================ */
+
+:root {
+    --color-space-indigo: #2b2d42;
+    --color-space-indigo-light: #4b4d5e;
+    --color-lavender-grey: #8d99ae;
+    --color-lavender-grey-dark: #717a8b;
+    --color-platinum: #edf2f4;
+    --color-platinum-dark: #dadfe0;
+}
+
+body {
+    background-color: var(--color-platinum) !important;
+    color: var(--color-space-indigo) !important;
+}
+
+.bg-dark,
+.text-bg-dark {
+    background-color: var(--color-space-indigo) !important;
+}
+
+.text-white {
+    color: var(--color-platinum) !important;
+}
+
+.text-muted {
+    color: var(--color-lavender-grey) !important;
+}
+
+.text-dark {
+    color: var(--color-space-indigo) !important;
+}
+
+.text-custom-coral {
+    color: var(--color-lavender-grey);
+}
+
+a.nav-link:hover {
+    color: var(--color-lavender-grey) !important;
+}
+
+.post-category.bg-success,
+.bg-success {
+    background-color: var(--color-lavender-grey) !important;
+    color: var(--color-space-indigo) !important;
+}
+
+.btn-success {
+    background-color: var(--color-space-indigo) !important;
+    border-color: var(--color-space-indigo) !important;
+    color: var(--color-platinum) !important;
+}
+.btn-success:hover {
+    background-color: var(--color-space-indigo-light) !important;
+    border-color: var(--color-space-indigo-light) !important;
+}
+
+.btn-primary {
+    background-color: var(--color-space-indigo) !important;
+    border-color: var(--color-space-indigo) !important;
+}
+.btn-primary:hover {
+    background-color: var(--color-space-indigo-light) !important;
+    border-color: var(--color-space-indigo-light) !important;
+}
+
+.btn-info {
+    background-color: var(--color-lavender-grey) !important;
+    border-color: var(--color-lavender-grey) !important;
+    color: var(--color-space-indigo) !important;
+}
+.btn-info:hover {
+    background-color: var(--color-lavender-grey-dark) !important;
+    border-color: var(--color-lavender-grey-dark) !important;
+}
+
+.btn-warning {
+    background-color: var(--color-lavender-grey) !important;
+    border-color: var(--color-lavender-grey) !important;
+    color: var(--color-space-indigo) !important;
+}
+.btn-warning:hover {
+    background-color: var(--color-lavender-grey-dark) !important;
+    border-color: var(--color-lavender-grey-dark) !important;
+}
+
+.btn-outline-light {
+    color: var(--color-platinum) !important;
+    border-color: var(--color-platinum) !important;
+}
+.btn-outline-light:hover {
+    background-color: var(--color-platinum) !important;
+    color: var(--color-space-indigo) !important;
+}
+
+.card {
+    background-color: var(--color-platinum) !important;
+    border-color: var(--color-platinum-dark) !important;
+}
+
+.child {
+    background-color: var(--color-platinum-dark);
+}
